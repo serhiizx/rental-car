@@ -4,6 +4,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useState, type FormEvent } from 'react'
 import { Button, SelectField } from '@/shared/ui'
 import type { SelectOption } from '@/shared/ui'
+import { buildPriceOptions } from '../lib/priceOptions'
 import { carsQueryToSearchParams } from '../lib/searchParams'
 import styles from './CarFilters.module.css'
 
@@ -13,19 +14,6 @@ type CarFiltersProps = {
     min: number
     max: number
   }
-}
-
-const PRICE_STEP = 10
-
-function buildPriceOptions(min: number, max: number): SelectOption[] {
-  const options: SelectOption[] = []
-  const start = Math.ceil(min / PRICE_STEP) * PRICE_STEP
-
-  for (let value = start; value <= max; value += PRICE_STEP) {
-    options.push({ value: String(value), label: `To $${value}` })
-  }
-
-  return options
 }
 
 function formatMileageInput(value: string): string {
@@ -46,6 +34,25 @@ export function CarFilters({ brands, priceRange }: CarFiltersProps) {
   const [maxMileage, setMaxMileage] = useState(
     formatMileageInput(searchParams.get('maxMileage') ?? ''),
   )
+
+  // useState вище лише ІНІЦІАЛІЗУЄ поля з URL при першому рендері. Якщо
+  // користувач переходить на /catalog іншим способом у межах того самого
+  // роуту (напр. клік по "Catalog" у хедері), CarFilters не розмонтовується —
+  // useState не перезапускається, і форма показує застарілі значення, хоч
+  // useSearchParams() вже інша. Рядок нижче — той самий query, з якого
+  // побудовано поточні поля; коли він розходиться з фактичним URL, стан
+  // підганяється прямо під час рендеру (react.dev: "Adjusting state when a
+  // prop changes"), без зайвого проходу через useEffect і без порушення
+  // правила "фільтри застосовуються лише на Search".
+  const searchParamsKey = searchParams.toString()
+  const [syncedKey, setSyncedKey] = useState(searchParamsKey)
+  if (searchParamsKey !== syncedKey) {
+    setSyncedKey(searchParamsKey)
+    setBrand(searchParams.get('brand') ?? '')
+    setPrice(searchParams.get('price') ?? '')
+    setMinMileage(formatMileageInput(searchParams.get('minMileage') ?? ''))
+    setMaxMileage(formatMileageInput(searchParams.get('maxMileage') ?? ''))
+  }
 
   const brandOptions: SelectOption[] = brands.map((item) => ({
     value: item,
@@ -102,11 +109,11 @@ export function CarFilters({ brands, priceRange }: CarFiltersProps) {
         />
       </div>
 
-      <div className={styles.mileage}>
-        <span className={styles.mileageLabel}>Car mileage / km</span>
+      <fieldset className={styles.mileage}>
+        <legend className={styles.mileageLabel}>Car mileage / km</legend>
         <div className={styles.mileageInputs}>
           <label className={styles.visuallyHidden} htmlFor="minMileage">
-            Пробіг від
+            Mileage from
           </label>
           <input
             id="minMileage"
@@ -117,7 +124,7 @@ export function CarFilters({ brands, priceRange }: CarFiltersProps) {
             onChange={(event) => setMinMileage(formatMileageInput(event.target.value))}
           />
           <label className={styles.visuallyHidden} htmlFor="maxMileage">
-            Пробіг до
+            Mileage to
           </label>
           <input
             id="maxMileage"
@@ -128,7 +135,7 @@ export function CarFilters({ brands, priceRange }: CarFiltersProps) {
             onChange={(event) => setMaxMileage(formatMileageInput(event.target.value))}
           />
         </div>
-      </div>
+      </fieldset>
 
       <Button type="submit" className={styles.submit}>
         Search

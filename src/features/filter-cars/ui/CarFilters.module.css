@@ -19,9 +19,15 @@
   flex-direction: column;
   gap: 8px;
   width: 320px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
 }
 
 .mileageLabel {
+  margin: 0;
+  padding: 0;
   font-family: var(--font-family);
   font-size: var(--font-size-body-2);
   line-height: var(--line-height-body-2);
