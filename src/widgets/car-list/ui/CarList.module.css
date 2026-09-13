@@ -37,8 +37,8 @@
 }
 
 .stateHint {
-  font-size: var(--font-size-body);
-  line-height: var(--line-height-body);
+  font-size: var(--font-size-body-2);
+  line-height: var(--line-height-body-2);
   font-weight: var(--font-weight-body-2);
   color: var(--color-gray);
   margin: 0;

@@ -1,6 +1,7 @@
 'use client'
 
 import { useInfiniteQuery } from '@tanstack/react-query'
+import toast from 'react-hot-toast'
 import { CarCard, carsInfiniteQueryOptions } from '@/entities/car'
 import type { CarsQuery } from '@/entities/car'
 import { Button, Loader } from '@/shared/ui'
@@ -17,7 +18,7 @@ export function CarList({ query }: CarListProps) {
     hasNextPage,
     isFetchingNextPage,
     isPending,
-    isError,
+    isLoadingError,
     refetch,
   } = useInfiniteQuery(carsInfiniteQueryOptions(query))
 
@@ -29,7 +30,10 @@ export function CarList({ query }: CarListProps) {
     )
   }
 
-  if (isError) {
+  // isLoadingError (error + no cached data) — не плутати з помилкою довантаження
+  // наступної сторінки: там `data` уже є, і повний список ламати не можна,
+  // за це відповідає toast у Load more нижче.
+  if (isLoadingError) {
     return (
       <div className={styles.state}>
         <p className={styles.stateText}>
@@ -67,7 +71,11 @@ export function CarList({ query }: CarListProps) {
         <Button
           variant="secondary"
           className={styles.loadMore}
-          onClick={() => fetchNextPage()}
+          onClick={() =>
+            fetchNextPage({ throwOnError: true }).catch(() =>
+              toast.error('Не вдалося завантажити ще автомобілі. Спробуйте ще раз.'),
+            )
+          }
           disabled={isFetchingNextPage}
         >
           {isFetchingNextPage ? 'Завантаження…' : 'Load more'}
