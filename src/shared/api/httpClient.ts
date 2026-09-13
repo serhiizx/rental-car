@@ -1,16 +1,18 @@
-import { API_BASE_URL } from '@/shared/config/env'
-import { HttpError } from './HttpError'
+import { API_BASE_URL } from '../config/env.ts'
+import { HttpError } from './HttpError.ts'
 
 export async function request<T>(
   path: string,
   init?: RequestInit,
 ): Promise<T> {
+  const headers = new Headers(init?.headers)
+  if (!headers.has('Content-Type')) {
+    headers.set('Content-Type', 'application/json')
+  }
+
   const response = await fetch(`${API_BASE_URL}${path}`, {
     ...init,
-    headers: {
-      'Content-Type': 'application/json',
-      ...init?.headers,
-    },
+    headers,
   })
 
   if (!response.ok) {
