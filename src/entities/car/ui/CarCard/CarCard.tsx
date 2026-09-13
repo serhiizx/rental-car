@@ -6,9 +6,10 @@ import styles from './CarCard.module.css'
 
 type CarCardProps = {
   car: Car
+  priority?: boolean
 }
 
-export function CarCard({ car }: CarCardProps) {
+export function CarCard({ car, priority = false }: CarCardProps) {
   const detailsRow1 = [car.location.city, car.location.country, car.rentalCompany]
   const detailsRow2 = [car.type, formatMileage(car.mileage)]
 
@@ -21,6 +22,7 @@ export function CarCard({ car }: CarCardProps) {
           width={244}
           height={268}
           className={styles.image}
+          priority={priority}
         />
       </div>
 

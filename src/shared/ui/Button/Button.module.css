@@ -27,7 +27,7 @@
 
 .secondary {
   background-color: transparent;
-  border-color: var(--color-gray-light);
+  border-color: var(--color-blue);
   color: var(--color-main);
 }
 
