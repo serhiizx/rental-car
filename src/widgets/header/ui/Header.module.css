@@ -12,9 +12,9 @@
 }
 
 .logo {
-  font-size: 20px;
-  line-height: 28px;
-  font-weight: 800;
+  font-size: var(--font-size-logo);
+  line-height: var(--line-height-logo);
+  font-weight: var(--font-weight-logo);
   color: var(--color-main);
   text-decoration: none;
 }
