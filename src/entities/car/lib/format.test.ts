@@ -11,6 +11,8 @@ import {
 test('formatMileage додає розділювач тисяч і одиницю', () => {
   assert.equal(formatMileage(6234), '6 234 km')
   assert.equal(formatMileage(999), '999 km')
+  assert.equal(formatMileage(1000), '1 000 km')
+  assert.equal(formatMileage(5), '5 km')
 })
 
 test('formatPrice додає знак долара', () => {

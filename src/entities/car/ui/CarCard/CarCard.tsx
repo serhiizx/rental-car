@@ -1,12 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Car } from '../../model/types'
-import {
-  formatAddress,
-  formatCarTitle,
-  formatMileage,
-  formatPrice,
-} from '../../lib/format'
+import { formatCarTitle, formatMileage, formatPrice } from '../../lib/format'
 import styles from './CarCard.module.css'
 
 type CarCardProps = {
@@ -14,14 +9,8 @@ type CarCardProps = {
 }
 
 export function CarCard({ car }: CarCardProps) {
-  const details = [
-    formatAddress(car.location),
-    car.rentalCompany,
-    car.type,
-    car.model,
-    String(car.year),
-    formatMileage(car.mileage),
-  ]
+  const detailsRow1 = [car.location.city, car.location.country, car.rentalCompany]
+  const detailsRow2 = [car.type, formatMileage(car.mileage)]
 
   return (
     <article className={styles.card}>
@@ -29,7 +18,7 @@ export function CarCard({ car }: CarCardProps) {
         <Image
           src={car.img}
           alt={formatCarTitle(car)}
-          width={276}
+          width={244}
           height={268}
           className={styles.image}
         />
@@ -43,18 +32,28 @@ export function CarCard({ car }: CarCardProps) {
         <p className={styles.price}>{formatPrice(car.rentalPrice)}</p>
       </div>
 
-      <p className={styles.details}>
-        {details.map((item, index) => (
-          <span key={`${item}-${index}`} className={styles.detail}>
-            {item}
-          </span>
-        ))}
-      </p>
+      <div className={styles.details}>
+        <div className={styles.detailsRow}>
+          {detailsRow1.map((item, index) => (
+            <span key={`${item}-${index}`} className={styles.detail}>
+              {item}
+            </span>
+          ))}
+        </div>
+        <div className={styles.detailsRow}>
+          {detailsRow2.map((item, index) => (
+            <span key={`${item}-${index}`} className={styles.detail}>
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
 
       <Link
         href={`/catalog/${car.id}`}
         target="_blank"
         rel="noopener noreferrer"
+        aria-label={`Read more about ${formatCarTitle(car)}`}
         className={styles.link}
       >
         Read more
