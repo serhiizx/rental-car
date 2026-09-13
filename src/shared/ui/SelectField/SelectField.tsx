@@ -1,4 +1,5 @@
 import type { ChangeEvent } from 'react'
+import { cn } from '@/shared/lib'
 import styles from './SelectField.module.css'
 
 export type SelectOption = {
@@ -36,7 +37,7 @@ export function SelectField({
         name={name}
         value={value}
         onChange={onChange}
-        className={styles.control}
+        className={cn(styles.control)}
       >
         {placeholder ? <option value="">{placeholder}</option> : null}
         {options.map((option) => (

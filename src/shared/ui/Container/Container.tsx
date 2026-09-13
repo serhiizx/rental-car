@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { cn } from '@/shared/lib'
 import styles from './Container.module.css'
 
 type ContainerProps = {
@@ -7,9 +8,5 @@ type ContainerProps = {
 }
 
 export function Container({ children, className }: ContainerProps) {
-  return (
-    <div className={className ? `${styles.container} ${className}` : styles.container}>
-      {children}
-    </div>
-  )
+  return <div className={cn(styles.container, className)}>{children}</div>
 }

@@ -1,4 +1,5 @@
 import type { ChangeEvent, FocusEvent } from 'react'
+import { cn } from '@/shared/lib'
 import styles from './TextField.module.css'
 
 type TextFieldProps = {
@@ -24,9 +25,7 @@ export function TextField({
   error,
   as = 'input',
 }: TextFieldProps) {
-  const controlClasses = [styles.control, error ? styles.invalid : null]
-    .filter(Boolean)
-    .join(' ')
+  const controlClasses = cn(styles.control, error ? styles.invalid : null)
 
   return (
     <div className={styles.field}>
@@ -44,7 +43,7 @@ export function TextField({
           onChange={onChange}
           onBlur={onBlur}
           placeholder={placeholder}
-          className={`${controlClasses} ${styles.textarea}`}
+          className={cn(controlClasses, styles.textarea)}
           aria-invalid={Boolean(error)}
         />
       ) : (

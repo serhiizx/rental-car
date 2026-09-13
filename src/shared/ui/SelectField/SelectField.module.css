@@ -18,7 +18,7 @@
   background-color: var(--color-white);
   border: 1px solid var(--color-gray-light);
   border-radius: var(--radius-md);
-  padding: 12px 16px;
+  padding: 11px 16px;
   font-family: var(--font-family);
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
