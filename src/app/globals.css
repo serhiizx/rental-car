@@ -1,0 +1,11 @@
+@import '../shared/styles/reset.css';
+@import '../shared/styles/tokens.css';
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  font-weight: var(--font-weight-body);
+  color: var(--color-main);
+  background-color: var(--color-white);
+}

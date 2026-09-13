@@ -1,0 +1,44 @@
+:root {
+  /* Колір */
+  --color-main: #101828;
+  --color-badges: #f2f4f7;
+  --color-inputs: #f7f7f7;
+  --color-white: #ffffff;
+  --color-blue: #00aad4;
+  --color-blue-dark: #0095ba;
+  --color-gray: #8d929a;
+  --color-gray-light: #dadde1;
+  --color-error: #ec383b;
+  --color-error-light: #ffdfdf;
+
+  /* Типографіка */
+  --font-family: var(--font-manrope), system-ui, sans-serif;
+
+  --font-size-body: 16px;
+  --line-height-body: 20px;
+  --font-weight-body: 500;
+
+  --font-size-body-2: 12px;
+  --line-height-body-2: 16px;
+  --font-weight-body-2: 400;
+
+  --font-size-button: 16px;
+  --line-height-button: 20px;
+  --font-weight-button: 600;
+
+  --font-size-h2: 24px;
+  --line-height-h2: 32px;
+  --font-weight-h2: 600;
+
+  /* Геометрія */
+  --radius-sm: 4px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+  --radius-pill: 200px;
+
+  --layout-width: 1440px;
+  --layout-padding: 120px;
+  --content-width: 1200px;
+
+  --header-height: 68px;
+}
