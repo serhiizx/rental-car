@@ -4,7 +4,8 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import { CarCard, carsInfiniteQueryOptions } from '@/entities/car'
 import type { CarsQuery } from '@/entities/car'
-import { Button, Loader } from '@/shared/ui'
+import { Button, StatusMessage } from '@/shared/ui'
+import { CarListSkeleton } from './CarListSkeleton'
 import styles from './CarList.module.css'
 
 type CarListProps = {
@@ -23,11 +24,7 @@ export function CarList({ query }: CarListProps) {
   } = useInfiniteQuery(carsInfiniteQueryOptions(query))
 
   if (isPending) {
-    return (
-      <div className={styles.state}>
-        <Loader />
-      </div>
-    )
+    return <CarListSkeleton />
   }
 
   // isLoadingError (error + no cached data) — не плутати з помилкою довантаження
@@ -35,12 +32,11 @@ export function CarList({ query }: CarListProps) {
   // за це відповідає toast у Load more нижче.
   if (isLoadingError) {
     return (
-      <div className={styles.state}>
-        <p className={styles.stateText}>
-          Не вдалося завантажити автомобілі. Спробуйте ще раз.
-        </p>
-        <Button onClick={() => refetch()}>Спробувати знову</Button>
-      </div>
+      <StatusMessage
+        title="Не вдалося завантажити автомобілі"
+        description="Перевірте зʼєднання з мережею та спробуйте ще раз."
+        action={<Button onClick={() => refetch()}>Спробувати знову</Button>}
+      />
     )
   }
 
@@ -48,12 +44,10 @@ export function CarList({ query }: CarListProps) {
 
   if (cars.length === 0) {
     return (
-      <div className={styles.state}>
-        <p className={styles.stateText}>
-          За заданими фільтрами автомобілів не знайдено.
-        </p>
-        <p className={styles.stateHint}>Змініть параметри пошуку й спробуйте ще раз.</p>
-      </div>
+      <StatusMessage
+        title="Автомобілів не знайдено"
+        description="За заданими фільтрами немає жодного авто. Змініть параметри пошуку."
+      />
     )
   }
 

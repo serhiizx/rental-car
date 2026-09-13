@@ -17,29 +17,3 @@
   margin: 40px auto 0;
   display: block;
 }
-
-.state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  padding: 80px 0;
-  text-align: center;
-}
-
-.stateText {
-  font-size: var(--font-size-h2);
-  line-height: var(--line-height-h2);
-  font-weight: var(--font-weight-h2);
-  color: var(--color-main);
-  margin: 0;
-}
-
-.stateHint {
-  font-size: var(--font-size-body-2);
-  line-height: var(--line-height-body-2);
-  font-weight: var(--font-weight-body-2);
-  color: var(--color-gray);
-  margin: 0;
-}
