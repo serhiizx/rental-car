@@ -13,18 +13,18 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: {
-    default: 'RentalCar — оренда автомобілів',
+    default: 'RentalCar — Car Rental Service',
     template: '%s | RentalCar',
   },
   description:
-    'RentalCar — сервіс оренди автомобілів в Україні. Обирайте авто за брендом, ціною та пробігом і бронюйте онлайн.',
+    'RentalCar is a car rental service. Browse the fleet by brand, price and mileage, and book your car online in minutes.',
 }
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="uk" className={manrope.variable}>
+    <html lang="en" className={manrope.variable}>
       <body>
         <Providers>
           <Header />

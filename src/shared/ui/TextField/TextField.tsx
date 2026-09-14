@@ -12,6 +12,7 @@ type TextFieldProps = {
   type?: string
   error?: string
   as?: 'input' | 'textarea'
+  autoComplete?: string
 }
 
 export function TextField({
@@ -24,6 +25,7 @@ export function TextField({
   type = 'text',
   error,
   as = 'input',
+  autoComplete,
 }: TextFieldProps) {
   const controlClasses = cn(styles.control, error ? styles.invalid : null)
   const errorId = `${name}-error`
@@ -44,6 +46,7 @@ export function TextField({
           onChange={onChange}
           onBlur={onBlur}
           placeholder={placeholder}
+          autoComplete={autoComplete}
           className={cn(controlClasses, styles.textarea)}
           aria-invalid={Boolean(error)}
           aria-describedby={error ? errorId : undefined}
@@ -57,6 +60,7 @@ export function TextField({
           onChange={onChange}
           onBlur={onBlur}
           placeholder={placeholder}
+          autoComplete={autoComplete}
           className={controlClasses}
           aria-invalid={Boolean(error)}
           aria-describedby={error ? errorId : undefined}

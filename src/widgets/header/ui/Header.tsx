@@ -20,7 +20,7 @@ export function Header() {
         <Link
           href="/"
           className={styles.logo}
-          aria-label="RentalCar, на головну"
+          aria-label="RentalCar, go to homepage"
         >
           Rental<span className={styles.logoAccent}>Car</span>
         </Link>

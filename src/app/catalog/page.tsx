@@ -9,9 +9,9 @@ import { parseCarsQuery } from '@/features/filter-cars'
 import { CatalogPage } from '@/views/catalog'
 
 export const metadata: Metadata = {
-  title: 'Каталог автомобілів',
+  title: 'Car Catalog',
   description:
-    'Перегляньте доступні для оренди автомобілі та відфільтруйте їх за брендом, ціною і пробігом.',
+    'Browse available rental cars and filter by brand, price and mileage.',
 }
 
 type PageProps = {

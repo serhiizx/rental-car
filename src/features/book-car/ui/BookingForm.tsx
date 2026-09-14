@@ -54,6 +54,7 @@ export function BookingForm({ carId }: BookingFormProps) {
         <TextField
           name="name"
           placeholder="Name*"
+          autoComplete="name"
           value={formik.values.name}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -67,6 +68,7 @@ export function BookingForm({ carId }: BookingFormProps) {
           name="email"
           type="email"
           placeholder="Email*"
+          autoComplete="email"
           value={formik.values.email}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}

@@ -16,7 +16,7 @@ type CatalogPageProps = {
 export function CatalogPage({ query, brands, priceRange }: CatalogPageProps) {
   return (
     <Container className={styles.page}>
-      <h1 className={styles.visuallyHidden}>Каталог автомобілів</h1>
+      <h1 className={styles.visuallyHidden}>Car catalog</h1>
       <CarFilters brands={brands} priceRange={priceRange} />
       <CarList query={query} />
     </Container>
