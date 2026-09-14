@@ -1,6 +1,10 @@
 'use client'
 
-import { isServer, QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import {
+  isServer,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 import type { ReactNode } from 'react'
 import { Toaster } from 'react-hot-toast'
 

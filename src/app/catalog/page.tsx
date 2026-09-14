@@ -1,4 +1,8 @@
-import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query'
 import type { Metadata } from 'next'
 import { carsInfiniteQueryOptions, getCarFilters } from '@/entities/car'
 import { parseCarsQuery } from '@/features/filter-cars'

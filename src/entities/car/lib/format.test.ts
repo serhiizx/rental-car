@@ -21,7 +21,11 @@ test('formatPrice додає знак долара', () => {
 
 test('formatAddress бере місто й країну', () => {
   assert.equal(
-    formatAddress({ country: 'Ukraine', city: 'Kharkiv', address: '321 Example Lane' }),
+    formatAddress({
+      country: 'Ukraine',
+      city: 'Kharkiv',
+      address: '321 Example Lane',
+    }),
     'Kharkiv, Ukraine',
   )
 })

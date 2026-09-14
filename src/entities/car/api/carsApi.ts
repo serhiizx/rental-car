@@ -7,10 +7,7 @@ import type {
   CarsResponse,
 } from '../model/types'
 
-export function getCars(
-  query: CarsQuery,
-  page: number,
-): Promise<CarsResponse> {
+export function getCars(query: CarsQuery, page: number): Promise<CarsResponse> {
   const params = buildCarsSearchParams(query, page)
   return request<CarsResponse>(`/cars?${params.toString()}`)
 }

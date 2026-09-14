@@ -26,7 +26,10 @@ export function CarDetailsPage({ car }: CarDetailsPageProps) {
     { icon: <LuCar />, label: `Type: ${car.type}` },
     { icon: <LuFuel />, label: `Fuel Consumption: ${car.fuelConsumption}` },
     { icon: <LuSettings />, label: `Engine: ${car.engine}` },
-    { icon: <PiRoadHorizon />, label: `Mileage: ${formatMileage(car.mileage)}` },
+    {
+      icon: <PiRoadHorizon />,
+      label: `Mileage: ${formatMileage(car.mileage)}`,
+    },
   ]
 
   return (
@@ -69,7 +72,10 @@ export function CarDetailsPage({ car }: CarDetailsPageProps) {
             <ul className={styles.list}>
               {car.rentalConditions.map((condition) => (
                 <li key={condition} className={styles.listItem}>
-                  <BsCheckCircle aria-hidden="true" className={styles.listIcon} />
+                  <BsCheckCircle
+                    aria-hidden="true"
+                    className={styles.listIcon}
+                  />
                   {condition}
                 </li>
               ))}
@@ -95,7 +101,10 @@ export function CarDetailsPage({ car }: CarDetailsPageProps) {
             <ul className={styles.list}>
               {car.features.map((feature) => (
                 <li key={feature} className={styles.listItem}>
-                  <BsCheckCircle aria-hidden="true" className={styles.listIcon} />
+                  <BsCheckCircle
+                    aria-hidden="true"
+                    className={styles.listIcon}
+                  />
                   {feature}
                 </li>
               ))}

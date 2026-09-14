@@ -7,7 +7,11 @@ type StatusMessageProps = {
   action?: ReactNode
 }
 
-export function StatusMessage({ title, description, action }: StatusMessageProps) {
+export function StatusMessage({
+  title,
+  description,
+  action,
+}: StatusMessageProps) {
   return (
     <div className={styles.wrapper}>
       <p className={styles.title}>{title}</p>

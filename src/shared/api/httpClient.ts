@@ -1,10 +1,7 @@
 import { API_BASE_URL } from '../config/env.ts'
 import { HttpError } from './HttpError.ts'
 
-export async function request<T>(
-  path: string,
-  init?: RequestInit,
-): Promise<T> {
+export async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const headers = new Headers(init?.headers)
   if (!headers.has('Content-Type')) {
     headers.set('Content-Type', 'application/json')

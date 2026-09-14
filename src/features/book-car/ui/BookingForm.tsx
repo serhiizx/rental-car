@@ -5,7 +5,11 @@ import { useFormik } from 'formik'
 import toast from 'react-hot-toast'
 import { Button, TextField } from '@/shared/ui'
 import { createBookingRequest } from '../api/createBookingRequest'
-import { bookingInitialValues, bookingSchema, type BookingFormValues } from '../model/bookingSchema'
+import {
+  bookingInitialValues,
+  bookingSchema,
+  type BookingFormValues,
+} from '../model/bookingSchema'
 import styles from './BookingForm.module.css'
 
 type BookingFormProps = {
@@ -14,7 +18,8 @@ type BookingFormProps = {
 
 export function BookingForm({ carId }: BookingFormProps) {
   const mutation = useMutation({
-    mutationFn: (values: BookingFormValues) => createBookingRequest(carId, values),
+    mutationFn: (values: BookingFormValues) =>
+      createBookingRequest(carId, values),
   })
 
   const formik = useFormik<BookingFormValues>({
@@ -38,7 +43,9 @@ export function BookingForm({ carId }: BookingFormProps) {
   return (
     <section className={styles.card}>
       <h2 className={styles.title}>Book your car now</h2>
-      <p className={styles.subtitle}>Stay connected! We are always ready to help you.</p>
+      <p className={styles.subtitle}>
+        Stay connected! We are always ready to help you.
+      </p>
 
       <form className={styles.form} onSubmit={formik.handleSubmit} noValidate>
         <label className={styles.visuallyHidden} htmlFor="name">
@@ -79,7 +86,12 @@ export function BookingForm({ carId }: BookingFormProps) {
           error={errorOf('comment')}
         />
 
-        <Button type="submit" size="lg" className={styles.submit} disabled={formik.isSubmitting}>
+        <Button
+          type="submit"
+          size="lg"
+          className={styles.submit}
+          disabled={formik.isSubmitting}
+        >
           {formik.isSubmitting ? 'Sending…' : 'Send'}
         </Button>
       </form>

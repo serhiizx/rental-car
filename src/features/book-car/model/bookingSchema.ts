@@ -24,5 +24,7 @@ export const bookingSchema = Yup.object({
     .trim()
     .email('Please enter a valid email address.')
     .required('Please enter your email.'),
-  comment: Yup.string().trim().max(500, 'Comment must be at most 500 characters.'),
+  comment: Yup.string()
+    .trim()
+    .max(500, 'Comment must be at most 500 characters.'),
 })

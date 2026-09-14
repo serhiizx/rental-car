@@ -10,7 +10,11 @@ type CarCardProps = {
 }
 
 export function CarCard({ car, priority = false }: CarCardProps) {
-  const detailsRow1 = [car.location.city, car.location.country, car.rentalCompany]
+  const detailsRow1 = [
+    car.location.city,
+    car.location.country,
+    car.rentalCompany,
+  ]
   const detailsRow2 = [car.type, formatMileage(car.mileage)]
 
   return (
@@ -22,7 +26,8 @@ export function CarCard({ car, priority = false }: CarCardProps) {
           width={244}
           height={268}
           className={styles.image}
-          priority={priority}
+          loading={priority ? 'eager' : 'lazy'}
+          fetchPriority={priority ? 'high' : 'auto'}
         />
       </div>
 

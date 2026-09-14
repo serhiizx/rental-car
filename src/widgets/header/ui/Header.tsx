@@ -17,7 +17,11 @@ export function Header() {
   return (
     <header className={styles.header}>
       <Container className={styles.inner}>
-        <Link href="/" className={styles.logo} aria-label="RentalCar, на головну">
+        <Link
+          href="/"
+          className={styles.logo}
+          aria-label="RentalCar, на головну"
+        >
           Rental<span className={styles.logoAccent}>Car</span>
         </Link>
 
@@ -25,7 +29,9 @@ export function Header() {
           <ul className={styles.nav}>
             {navItems.map((item) => {
               const isActive =
-                item.href === '/' ? pathname === '/' : pathname.startsWith(item.href)
+                item.href === '/'
+                  ? pathname === '/'
+                  : pathname.startsWith(item.href)
 
               return (
                 <li key={item.href}>

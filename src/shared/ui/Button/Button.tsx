@@ -27,7 +27,12 @@ export function Button({
   type = 'button',
   ...rest
 }: ButtonProps) {
-  const classes = cn(styles.button, variantClassNames[variant], sizeClassNames[size], className)
+  const classes = cn(
+    styles.button,
+    variantClassNames[variant],
+    sizeClassNames[size],
+    className,
+  )
 
   return <button type={type} className={classes} {...rest} />
 }

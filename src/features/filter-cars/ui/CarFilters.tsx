@@ -121,7 +121,9 @@ export function CarFilters({ brands, priceRange }: CarFiltersProps) {
             name="minMileage"
             value={minMileage ? `From ${minMileage}` : ''}
             placeholder="From"
-            onChange={(event) => setMinMileage(formatMileageInput(event.target.value))}
+            onChange={(event) =>
+              setMinMileage(formatMileageInput(event.target.value))
+            }
           />
           <label className={styles.visuallyHidden} htmlFor="maxMileage">
             Mileage to
@@ -132,7 +134,9 @@ export function CarFilters({ brands, priceRange }: CarFiltersProps) {
             name="maxMileage"
             value={maxMileage ? `To ${maxMileage}` : ''}
             placeholder="To"
-            onChange={(event) => setMaxMileage(formatMileageInput(event.target.value))}
+            onChange={(event) =>
+              setMaxMileage(formatMileageInput(event.target.value))
+            }
           />
         </div>
       </fieldset>
