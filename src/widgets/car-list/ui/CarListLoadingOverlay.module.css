@@ -1,10 +1,18 @@
-.wrapper {
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 16px;
-  padding: 80px 0;
+  gap: 32px;
+  width: 543px;
+  max-width: calc(100vw - 32px);
+  padding: 48px 96px;
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
   text-align: center;
 }
 
@@ -17,14 +25,9 @@
 }
 
 .description {
-  max-width: 480px;
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
   font-weight: var(--font-weight-body);
   color: var(--color-main);
   margin: 0;
-}
-
-.action {
-  margin-top: 8px;
 }

@@ -16,9 +16,9 @@ export default function Error({ error, reset }: ErrorProps) {
   return (
     <Container>
       <StatusMessage
-        title="Щось пішло не так"
-        description="Сталася помилка під час завантаження сторінки."
-        action={<Button onClick={reset}>Спробувати знову</Button>}
+        title="Something went wrong"
+        description="An error occurred while loading the page."
+        action={<Button onClick={reset}>Try again</Button>}
       />
     </Container>
   )

@@ -5,9 +5,9 @@ export default function NotFound() {
   return (
     <Container>
       <StatusMessage
-        title="Сторінку не знайдено"
-        description="Можливо, посилання застаріле або сторінки не існує."
-        action={<Link href="/">На головну</Link>}
+        title="Page not found"
+        description="The link may be broken, or the page may no longer exist."
+        action={<Link href="/">Back to home</Link>}
       />
     </Container>
   )

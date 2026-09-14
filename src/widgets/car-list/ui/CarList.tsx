@@ -1,11 +1,13 @@
 'use client'
 
 import { useInfiniteQuery } from '@tanstack/react-query'
+import Image from 'next/image'
+import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { CarCard, carsInfiniteQueryOptions } from '@/entities/car'
 import type { CarsQuery } from '@/entities/car'
 import { Button, StatusMessage } from '@/shared/ui'
-import { CarListSkeleton } from './CarListSkeleton'
+import { CarListLoadingOverlay } from './CarListLoadingOverlay'
 import styles from './CarList.module.css'
 
 type CarListProps = {
@@ -24,7 +26,7 @@ export function CarList({ query }: CarListProps) {
   } = useInfiniteQuery(carsInfiniteQueryOptions(query))
 
   if (isPending) {
-    return <CarListSkeleton />
+    return <CarListLoadingOverlay />
   }
 
   // isLoadingError (error + no cached data) — не плутати з помилкою довантаження
@@ -33,9 +35,9 @@ export function CarList({ query }: CarListProps) {
   if (isLoadingError) {
     return (
       <StatusMessage
-        title="Не вдалося завантажити автомобілі"
-        description="Перевірте зʼєднання з мережею та спробуйте ще раз."
-        action={<Button onClick={() => refetch()}>Спробувати знову</Button>}
+        title="Failed to load cars"
+        description="Check your network connection and try again."
+        action={<Button onClick={() => refetch()}>Try again</Button>}
       />
     )
   }
@@ -44,10 +46,24 @@ export function CarList({ query }: CarListProps) {
 
   if (cars.length === 0) {
     return (
-      <StatusMessage
-        title="Автомобілів не знайдено"
-        description="За заданими фільтрами немає жодного авто. Змініть параметри пошуку."
-      />
+      <div className={styles.empty}>
+        <Image
+          src="/no-cars-found.png"
+          alt="No cars found"
+          width={414}
+          height={388}
+          className={styles.emptyImage}
+        />
+        <StatusMessage
+          title="No cars found"
+          description="We couldn't find any cars that match your current filters. Try changing your search criteria or reset the filters."
+          action={
+            <Link href="/catalog" className={styles.resetLink}>
+              Reset filters
+            </Link>
+          }
+        />
+      </div>
     )
   }
 
@@ -67,12 +83,12 @@ export function CarList({ query }: CarListProps) {
           className={styles.loadMore}
           onClick={() =>
             fetchNextPage({ throwOnError: true }).catch(() =>
-              toast.error('Не вдалося завантажити ще автомобілі. Спробуйте ще раз.'),
+              toast.error('Failed to load more cars. Please try again.'),
             )
           }
           disabled={isFetchingNextPage}
         >
-          {isFetchingNextPage ? 'Завантаження…' : 'Load more'}
+          {isFetchingNextPage ? 'Loading…' : 'Load more'}
         </Button>
       ) : null}
     </div>
