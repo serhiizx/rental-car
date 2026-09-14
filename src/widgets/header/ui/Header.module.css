@@ -40,5 +40,6 @@
 
 .active {
   color: var(--color-blue);
-  text-decoration: underline;
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-blue);
 }
