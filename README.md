@@ -1,94 +1,95 @@
 # RentalCar
 
-A frontend test task for RentalCar, a car rental company. The app lets
-visitors browse the fleet, filter it by brand, price and mileage, view a
-car's details, and submit a booking request.
+Тестове фронтенд-завдання для RentalCar — компанії з оренди автомобілів.
+Застосунок дозволяє переглядати автопарк, фільтрувати його за брендом,
+ціною та пробігом, дивитися деталі авто та надсилати заявку на бронювання.
 
-## Live demo
+## Демо
 
-_Not deployed yet — link will be added here after deployment._
+_Ще не задеплоєно — посилання буде додано після деплою._
 
-## Features
+## Можливості
 
-- **Home page** — a hero section with a call to action into the catalog.
-- **Catalog** (`/catalog`) — a paginated list of cars filtered on the
-  backend by brand, price and mileage. Filter state lives in the URL, so a
-  filtered link can be shared and survives a page reload. More cars are
-  fetched with a "Load more" button (`useInfiniteQuery`), keeping the active
-  filters applied. The first screen is prefetched on the server
-  (`prefetchInfiniteQuery` + `HydrationBoundary`), so it renders with data
-  already in place instead of flashing a loader.
-- **Car details** (`/catalog/[carId]`) — opens in a new tab from the
-  catalog's "Read more" link, and also works as a direct URL.
-- **Booking form** — built with Formik and Yup, validates the input and
-  shows a success/error toast (`react-hot-toast`) on submit.
+- **Головна сторінка** — hero-секція із закликом до дії, що веде в каталог.
+- **Каталог** (`/catalog`) — посторінковий список авто, який фільтрується на
+  бекенді за брендом, ціною та пробігом. Стан фільтрів зберігається в URL,
+  тож посиланням із фільтрами можна поділитися, і воно переживає
+  перезавантаження сторінки. Наступні авто довантажуються кнопкою
+  «Load more» (`useInfiniteQuery`) зі збереженням активних фільтрів. Перший
+  екран префетчиться на сервері (`prefetchInfiniteQuery` +
+  `HydrationBoundary`), тому рендериться одразу з даними, без миготіння
+  лоадера.
+- **Сторінка авто** (`/catalog/[carId]`) — відкривається з каталогу за
+  посиланням «Read more», а також працює як пряма URL-адреса.
+- **Форма бронювання** — побудована на Formik і Yup, валідує введені дані та
+  показує тост успіху/помилки (`react-hot-toast`) після відправлення.
 
-## Tech stack
+## Технології
 
 - [Next.js](https://nextjs.org) 16 (App Router)
 - [React](https://react.dev) 19, TypeScript (strict mode)
-- [TanStack Query](https://tanstack.com/query) 5 — `useInfiniteQuery` for
-  pagination, server-side prefetch + hydration for the catalog
-- [Formik](https://formik.org) + [Yup](https://github.com/jquense/yup) — the
-  booking form and its validation schema
-- CSS Modules with a shared design-token stylesheet
+- [TanStack Query](https://tanstack.com/query) 5 — `useInfiniteQuery` для
+  пагінації, префетч на сервері + гідратація для каталогу
+- [Formik](https://formik.org) + [Yup](https://github.com/jquense/yup) —
+  форма бронювання та її схема валідації
+- CSS Modules зі спільним файлом дизайн-токенів
 - [React Icons](https://react-icons.github.io/react-icons/)
 - [react-hot-toast](https://react-hot-toast.com)
 
-Backend: `https://car-rental-api.goit.study`
+Бекенд: `https://car-rental-api.goit.study`
 
-## Project structure
+## Структура проєкту
 
-The project follows Feature-Sliced Design on top of the Next.js App Router:
+Проєкт побудовано за Feature-Sliced Design поверх Next.js App Router:
 
-- `src/app` — Next.js routes: thin pages, metadata, loading/error/not-found
-- `src/views` — page-level compositions (the FSD `pages` layer, renamed to
-  avoid clashing with the Next.js `pages` concept)
-- `src/widgets` — larger self-contained UI blocks composed from features
-  and entities (header, car list)
-- `src/features` — user-facing actions (filtering the catalog, booking a
-  car)
-- `src/entities` — domain data and its UI (the `car` entity: types, API
-  calls, card component)
-- `src/shared` — reusable primitives with no domain knowledge: API client,
-  design tokens, UI kit, config
+- `src/app` — маршрути Next.js: тонкі сторінки, метадані,
+  loading/error/not-found
+- `src/views` — композиції рівня сторінки (шар `pages` з FSD, перейменований,
+  щоб не конфліктувати з поняттям `pages` у Next.js)
+- `src/widgets` — великі самодостатні UI-блоки, зібрані з features та
+  entities (хедер, список авто)
+- `src/features` — дії користувача (фільтрація каталогу, бронювання авто)
+- `src/entities` — доменні дані та їхній UI (сутність `car`: типи, запити до
+  API, компонент картки)
+- `src/shared` — перевикористовувані примітиви без знання про домен:
+  API-клієнт, дизайн-токени, UI-кіт, конфіг
 
-Each slice exposes its public API through an `index.ts`; imports only ever
-point down the layer stack.
+Кожен слайс віддає свій публічний API через `index.ts`; імпорти завжди
+спрямовані вниз по шарах.
 
-## Getting started
+## Запуск
 
 ```bash
 npm install
 npm run dev
 ```
 
-The app runs at `http://localhost:3000`.
+Застосунок доступний за адресою `http://localhost:3000`.
 
-## Scripts
+## Скрипти
 
-| Script              | Description                           |
-| ------------------- | ------------------------------------- |
-| `npm run dev`       | Start the dev server                  |
-| `npm run build`     | Build for production                  |
-| `npm start`         | Serve the production build            |
-| `npm run lint`      | Run ESLint                            |
-| `npm run format`    | Format the codebase with Prettier     |
-| `npm run typecheck` | Run the TypeScript compiler (no emit) |
-| `npm test`          | Run the unit tests                    |
+| Скрипт              | Опис                                      |
+| ------------------- | ----------------------------------------- |
+| `npm run dev`       | Запустити дев-сервер                      |
+| `npm run build`     | Зібрати продакшн-білд                     |
+| `npm start`         | Віддати продакшн-білд                     |
+| `npm run lint`      | Запустити ESLint                          |
+| `npm run format`    | Відформатувати код через Prettier         |
+| `npm run typecheck` | Запустити компілятор TypeScript (no emit) |
+| `npm test`          | Запустити юніт-тести                      |
 
-## Environment variables
+## Змінні середовища
 
-| Variable                   | Required | Default                             |
-| -------------------------- | -------- | ----------------------------------- |
-| `NEXT_PUBLIC_API_BASE_URL` | No       | `https://car-rental-api.goit.study` |
-| `NEXT_PUBLIC_SITE_URL`     | No       | `http://localhost:3000`             |
+| Змінна                     | Обовʼязкова | Значення за замовчуванням           |
+| -------------------------- | ----------- | ----------------------------------- |
+| `NEXT_PUBLIC_API_BASE_URL` | Ні          | `https://car-rental-api.goit.study` |
+| `NEXT_PUBLIC_SITE_URL`     | Ні          | `http://localhost:3000`             |
 
-Copy `.env.example` to `.env.local` if you need to point at a different
-backend; the app works out of the box without it. `NEXT_PUBLIC_SITE_URL` is
-used as `metadataBase` for absolute Open Graph URLs — override it with the
-deployed origin in production.
+Скопіюйте `.env.example` у `.env.local`, якщо потрібно вказати інший бекенд;
+без цього застосунок працює «з коробки». `NEXT_PUBLIC_SITE_URL`
+використовується як `metadataBase` для абсолютних Open Graph URL — на
+продакшні замініть його на реальний домен.
 
-## Author
+## Автор
 
 Serhii Zhdaniuk — jdanuk@gmail.com
