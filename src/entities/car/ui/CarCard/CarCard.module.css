@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 276px;
+  width: 100%;
   height: 100%;
   padding: 16px;
   background-color: var(--color-white);
@@ -10,7 +10,7 @@
 }
 
 .imageWrapper {
-  height: 268px;
+  aspect-ratio: 244 / 268;
   border-radius: var(--radius-md);
   overflow: hidden;
   background-color: var(--color-inputs);
@@ -65,12 +65,12 @@
 
 .detailsRow {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 6px;
 }
 
 .detail {
-  white-space: nowrap;
+  white-space: wrap;
 }
 
 .detail + .detail::before {

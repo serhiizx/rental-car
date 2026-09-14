@@ -4,10 +4,14 @@
 }
 
 .grid {
+  --indent: 32px;
+  --items: 4;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 276px);
-  gap: 32px 29px;
-  justify-content: center;
+  grid-template-columns: repeat(
+    var(--items),
+    calc((100% - var(--indent) * (var(--items) - 1)) / var(--items))
+  );
+  gap: var(--indent);
   list-style: none;
   margin: 0;
   padding: 0;
