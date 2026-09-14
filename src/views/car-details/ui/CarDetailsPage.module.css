@@ -45,13 +45,13 @@
 .header {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
   margin-bottom: 32px;
 }
 
 .titleRow {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 16px;
 }
 
@@ -68,6 +68,9 @@
   line-height: var(--line-height-body);
   font-weight: var(--font-weight-body);
   color: var(--color-gray);
+  white-space: nowrap;
+  position: relative;
+  top: 8px;
 }
 
 .location {
