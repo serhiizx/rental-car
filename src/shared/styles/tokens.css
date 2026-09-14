@@ -49,6 +49,9 @@
   --radius-lg: 14px;
   --radius-pill: 200px;
 
+  /* Тінь випадного списку фільтрів (з макета) */
+  --shadow-dropdown: 0 4px 36px rgba(0, 0, 0, 0.02);
+
   --layout-width: 1440px;
   --layout-padding: 120px;
   --content-width: 1200px;

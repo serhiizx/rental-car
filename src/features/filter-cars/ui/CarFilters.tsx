@@ -93,7 +93,7 @@ export function CarFilters({ brands, priceRange }: CarFiltersProps) {
           label="Car brand"
           placeholder="Choose a brand"
           value={brand}
-          onChange={(event) => setBrand(event.target.value)}
+          onChange={setBrand}
           options={brandOptions}
         />
       </div>
@@ -104,7 +104,7 @@ export function CarFilters({ brands, priceRange }: CarFiltersProps) {
           label="Price / 1 hour"
           placeholder="Choose a price"
           value={price}
-          onChange={(event) => setPrice(event.target.value)}
+          onChange={setPrice}
           options={priceOptions}
         />
       </div>
