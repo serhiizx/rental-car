@@ -26,6 +26,7 @@ export function TextField({
   as = 'input',
 }: TextFieldProps) {
   const controlClasses = cn(styles.control, error ? styles.invalid : null)
+  const errorId = `${name}-error`
 
   return (
     <div className={styles.field}>
@@ -45,6 +46,7 @@ export function TextField({
           placeholder={placeholder}
           className={cn(controlClasses, styles.textarea)}
           aria-invalid={Boolean(error)}
+          aria-describedby={error ? errorId : undefined}
         />
       ) : (
         <input
@@ -57,10 +59,15 @@ export function TextField({
           placeholder={placeholder}
           className={controlClasses}
           aria-invalid={Boolean(error)}
+          aria-describedby={error ? errorId : undefined}
         />
       )}
 
-      {error ? <span className={styles.error}>{error}</span> : null}
+      {error ? (
+        <span id={errorId} className={styles.error}>
+          {error}
+        </span>
+      ) : null}
     </div>
   )
 }

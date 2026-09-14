@@ -18,7 +18,7 @@ export async function request<T>(
   if (!response.ok) {
     throw new HttpError(
       response.status,
-      `Запит ${path} завершився помилкою ${response.status}`,
+      `Request to ${path} failed with status ${response.status}`,
     )
   }
 

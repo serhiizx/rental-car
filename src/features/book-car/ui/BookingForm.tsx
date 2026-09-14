@@ -41,9 +41,11 @@ export function BookingForm({ carId }: BookingFormProps) {
       <p className={styles.subtitle}>Stay connected! We are always ready to help you.</p>
 
       <form className={styles.form} onSubmit={formik.handleSubmit} noValidate>
+        <label className={styles.visuallyHidden} htmlFor="name">
+          Name
+        </label>
         <TextField
           name="name"
-          label="Name"
           placeholder="Name*"
           value={formik.values.name}
           onChange={formik.handleChange}
@@ -51,10 +53,12 @@ export function BookingForm({ carId }: BookingFormProps) {
           error={errorOf('name')}
         />
 
+        <label className={styles.visuallyHidden} htmlFor="email">
+          Email
+        </label>
         <TextField
           name="email"
           type="email"
-          label="Email"
           placeholder="Email*"
           value={formik.values.email}
           onChange={formik.handleChange}
@@ -62,10 +66,12 @@ export function BookingForm({ carId }: BookingFormProps) {
           error={errorOf('email')}
         />
 
+        <label className={styles.visuallyHidden} htmlFor="comment">
+          Comment
+        </label>
         <TextField
           as="textarea"
           name="comment"
-          label="Comment"
           placeholder="Comment"
           value={formik.values.comment}
           onChange={formik.handleChange}
