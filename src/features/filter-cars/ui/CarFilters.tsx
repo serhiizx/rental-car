@@ -1,11 +1,17 @@
 'use client'
 
+import { useFormik } from 'formik'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useState, type FormEvent } from 'react'
 import { Button, SelectField } from '@/shared/ui'
 import type { SelectOption } from '@/shared/ui'
 import { buildPriceOptions } from '../lib/priceOptions'
 import { carsQueryToSearchParams } from '../lib/searchParams'
+import {
+  carFiltersInitialValues,
+  carFiltersSchema,
+  mileageToNumber,
+  type CarFiltersValues,
+} from '../model/filtersSchema'
 import styles from './CarFilters.module.css'
 
 type CarFiltersProps = {
@@ -26,33 +32,29 @@ export function CarFilters({ brands, priceRange }: CarFiltersProps) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const [brand, setBrand] = useState(searchParams.get('brand') ?? '')
-  const [price, setPrice] = useState(searchParams.get('price') ?? '')
-  const [minMileage, setMinMileage] = useState(
-    formatMileageInput(searchParams.get('minMileage') ?? ''),
-  )
-  const [maxMileage, setMaxMileage] = useState(
-    formatMileageInput(searchParams.get('maxMileage') ?? ''),
-  )
+  const formik = useFormik<CarFiltersValues>({
+    enableReinitialize: true,
+    initialValues: {
+      brand: searchParams.get('brand') ?? '',
+      price: searchParams.get('price') ?? '',
+      minMileage: formatMileageInput(searchParams.get('minMileage') ?? ''),
+      maxMileage: formatMileageInput(searchParams.get('maxMileage') ?? ''),
+    },
+    validationSchema: carFiltersSchema,
+    onSubmit: (values) => {
+      const params = carsQueryToSearchParams({
+        brand: values.brand || undefined,
+        price: values.price ? Number(values.price) : undefined,
+        minMileage: mileageToNumber(values.minMileage),
+        maxMileage: mileageToNumber(values.maxMileage),
+      })
 
-  // useState вище лише ІНІЦІАЛІЗУЄ поля з URL при першому рендері. Якщо
-  // користувач переходить на /catalog іншим способом у межах того самого
-  // роуту (напр. клік по "Catalog" у хедері), CarFilters не розмонтовується —
-  // useState не перезапускається, і форма показує застарілі значення, хоч
-  // useSearchParams() вже інша. Рядок нижче — той самий query, з якого
-  // побудовано поточні поля; коли він розходиться з фактичним URL, стан
-  // підганяється прямо під час рендеру (react.dev: "Adjusting state when a
-  // prop changes"), без зайвого проходу через useEffect і без порушення
-  // правила "фільтри застосовуються лише на Search".
-  const searchParamsKey = searchParams.toString()
-  const [syncedKey, setSyncedKey] = useState(searchParamsKey)
-  if (searchParamsKey !== syncedKey) {
-    setSyncedKey(searchParamsKey)
-    setBrand(searchParams.get('brand') ?? '')
-    setPrice(searchParams.get('price') ?? '')
-    setMinMileage(formatMileageInput(searchParams.get('minMileage') ?? ''))
-    setMaxMileage(formatMileageInput(searchParams.get('maxMileage') ?? ''))
-  }
+      const queryString = params.toString()
+      router.replace(queryString ? `${pathname}?${queryString}` : pathname, {
+        scroll: false,
+      })
+    },
+  })
 
   const brandOptions: SelectOption[] = brands.map((item) => ({
     value: item,
@@ -61,39 +63,24 @@ export function CarFilters({ brands, priceRange }: CarFiltersProps) {
 
   const priceOptions = buildPriceOptions(priceRange.min, priceRange.max)
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-
-    const params = carsQueryToSearchParams({
-      brand: brand || undefined,
-      price: price ? Number(price) : undefined,
-      minMileage: Number(minMileage.replace(/\D/g, '')) || undefined,
-      maxMileage: Number(maxMileage.replace(/\D/g, '')) || undefined,
-    })
-
-    const queryString = params.toString()
-    router.replace(queryString ? `${pathname}?${queryString}` : pathname, {
-      scroll: false,
-    })
-  }
+  const mileageError = formik.touched.maxMileage
+    ? formik.errors.maxMileage
+    : undefined
 
   function handleReset() {
-    setBrand('')
-    setPrice('')
-    setMinMileage('')
-    setMaxMileage('')
+    formik.resetForm({ values: carFiltersInitialValues })
     router.replace(pathname, { scroll: false })
   }
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={formik.handleSubmit} noValidate>
       <div className={styles.brandField}>
         <SelectField
           name="brand"
           label="Car brand"
           placeholder="Choose a brand"
-          value={brand}
-          onChange={setBrand}
+          value={formik.values.brand}
+          onChange={(value) => formik.setFieldValue('brand', value)}
           options={brandOptions}
         />
       </div>
@@ -103,8 +90,8 @@ export function CarFilters({ brands, priceRange }: CarFiltersProps) {
           name="price"
           label="Price / 1 hour"
           placeholder="Choose a price"
-          value={price}
-          onChange={setPrice}
+          value={formik.values.price}
+          onChange={(value) => formik.setFieldValue('price', value)}
           options={priceOptions}
         />
       </div>
@@ -119,10 +106,16 @@ export function CarFilters({ brands, priceRange }: CarFiltersProps) {
             id="minMileage"
             className={`${styles.mileageInput} ${styles.mileageFrom}`}
             name="minMileage"
-            value={minMileage ? `From ${minMileage}` : ''}
+            value={
+              formik.values.minMileage ? `From ${formik.values.minMileage}` : ''
+            }
             placeholder="From"
+            onBlur={formik.handleBlur}
             onChange={(event) =>
-              setMinMileage(formatMileageInput(event.target.value))
+              formik.setFieldValue(
+                'minMileage',
+                formatMileageInput(event.target.value),
+              )
             }
           />
           <label className={styles.visuallyHidden} htmlFor="maxMileage">
@@ -132,13 +125,26 @@ export function CarFilters({ brands, priceRange }: CarFiltersProps) {
             id="maxMileage"
             className={`${styles.mileageInput} ${styles.mileageTo}`}
             name="maxMileage"
-            value={maxMileage ? `To ${maxMileage}` : ''}
+            value={
+              formik.values.maxMileage ? `To ${formik.values.maxMileage}` : ''
+            }
             placeholder="To"
+            aria-invalid={Boolean(mileageError)}
+            aria-describedby={mileageError ? 'mileage-error' : undefined}
+            onBlur={formik.handleBlur}
             onChange={(event) =>
-              setMaxMileage(formatMileageInput(event.target.value))
+              formik.setFieldValue(
+                'maxMileage',
+                formatMileageInput(event.target.value),
+              )
             }
           />
         </div>
+        {mileageError ? (
+          <p id="mileage-error" className={styles.error}>
+            {mileageError}
+          </p>
+        ) : null}
       </fieldset>
 
       <Button type="submit" className={styles.submit}>

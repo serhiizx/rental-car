@@ -99,3 +99,11 @@
   font-weight: var(--font-weight-body);
   color: var(--color-gray);
 }
+
+.error {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body-2);
+  line-height: var(--line-height-body-2);
+  color: var(--color-error);
+}
