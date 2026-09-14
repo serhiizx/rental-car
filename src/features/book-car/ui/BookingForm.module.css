@@ -1,0 +1,31 @@
+.card {
+  padding: 32px;
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+}
+
+.title {
+  margin: 0 0 8px;
+  font-size: var(--font-size-h3);
+  line-height: var(--line-height-h3);
+  font-weight: var(--font-weight-h3);
+  color: var(--color-main);
+}
+
+.subtitle {
+  margin: 0 0 24px;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  font-weight: var(--font-weight-body);
+  color: var(--color-gray);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.submit {
+  margin-top: 8px;
+}
