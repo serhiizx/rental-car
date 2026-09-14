@@ -1,18 +1,17 @@
+/* Розміри й відступи взяті з вузла Home макета (12791:1286):
+   контейнер hero — 700px заввишки, текстовий блок притиснутий до низу з
+   відступом 60px, усередині нього 16px між заголовками і 40px до кнопки. */
 .hero {
-  min-height: calc(100vh - var(--header-height));
+  height: 700px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
+  padding: 0 var(--layout-padding) 60px;
   background-image:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--color-main) 35%, transparent) 0%,
-      color-mix(in srgb, var(--color-main) 70%, transparent) 100%
-    ),
+    linear-gradient(var(--color-hero-overlay), var(--color-hero-overlay)),
     url('/hero.jpg');
   background-size: cover;
   background-position: center;
-  padding: 0 var(--layout-padding);
 }
 
 .content {
@@ -20,8 +19,15 @@
   flex-direction: column;
   align-items: center;
   gap: 40px;
-  text-align: center;
   max-width: var(--content-width);
+  text-align: center;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
 .title {
@@ -29,7 +35,6 @@
   line-height: var(--line-height-h1);
   font-weight: var(--font-weight-h1);
   color: var(--color-white);
-  margin: 0;
 }
 
 .subtitle {
@@ -37,13 +42,13 @@
   line-height: var(--line-height-h2);
   font-weight: var(--font-weight-h2);
   color: var(--color-white);
-  margin: 0;
 }
 
 .cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 276px;
   padding: 12px 99px;
   border-radius: var(--radius-md);
   background-color: var(--color-blue);
@@ -51,7 +56,10 @@
   font-size: var(--font-size-button);
   line-height: var(--line-height-button);
   font-weight: var(--font-weight-button);
-  text-decoration: none;
+  /* Ширина 276px мінус padding лишає рівно 78px — «View Catalog» уміщується
+     буквально впритул, тож без nowrap текст ламається на два рядки і кнопка
+     виростає з 44px до 64px. */
+  white-space: nowrap;
   transition: background-color 0.2s ease;
 }
 

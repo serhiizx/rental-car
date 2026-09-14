@@ -12,6 +12,9 @@
   --color-error: #ec383b;
   --color-error-light: #ffdfdf;
 
+  /* Затемнення фото на головній (з макета: суцільні 20% чорного) */
+  --color-hero-overlay: rgba(0, 0, 0, 0.2);
+
   /* Типографіка */
   --font-family: var(--font-manrope), system-ui, sans-serif;
 

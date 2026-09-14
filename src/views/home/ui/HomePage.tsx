@@ -5,10 +5,13 @@ export function HomePage() {
   return (
     <section className={styles.hero}>
       <div className={styles.content}>
-        <h1 className={styles.title}>Find your perfect rental car</h1>
-        <p className={styles.subtitle}>
-          Reliable and budget-friendly rentals for any journey
-        </p>
+        <div className={styles.text}>
+          <h1 className={styles.title}>Find your perfect rental car</h1>
+          <p className={styles.subtitle}>
+            Reliable and budget-friendly rentals for any journey
+          </p>
+        </div>
+
         <Link href="/catalog" className={styles.cta}>
           View Catalog
         </Link>
