@@ -33,6 +33,10 @@ export function SelectField({
   const rootRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLButtonElement>(null)
   const listRef = useRef<HTMLUListElement>(null)
+  // Чи змінили активну опцію з клавіатури. Автопрокрутка потрібна тільки тоді:
+  // при наведенні мишею вона прокручувала б список прямо під курсором, ціль
+  // тікала б з-під нього і клік потрапляв би не в ту опцію.
+  const scrollOnActiveChange = useRef(false)
 
   const listboxId = useId()
   const labelId = useId()
@@ -59,15 +63,19 @@ export function SelectField({
 
   // Тримаємо активну опцію в полі зору при навігації з клавіатури.
   useEffect(() => {
-    if (!isOpen || activeIndex < 0) {
+    if (!isOpen || activeIndex < 0 || !scrollOnActiveChange.current) {
       return
     }
 
+    scrollOnActiveChange.current = false
     const activeOption = listRef.current?.children[activeIndex]
     activeOption?.scrollIntoView({ block: 'nearest' })
   }, [isOpen, activeIndex])
 
   function open(startIndex: number) {
+    // При відкритті прокрутка доречна завжди: раніше вибрана опція може бути
+    // поза видимою частиною списку.
+    scrollOnActiveChange.current = true
     setActiveIndex(startIndex)
     setIsOpen(true)
     // Safari не дає кнопці фокус при кліку, тож без цього виклику клавіатурна
@@ -87,6 +95,8 @@ export function SelectField({
   }
 
   function handleKeyDown(event: React.KeyboardEvent) {
+    scrollOnActiveChange.current = true
+
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault()
@@ -192,7 +202,10 @@ export function SelectField({
                 )}
                 role="option"
                 aria-selected={index === selectedIndex}
-                onMouseEnter={() => setActiveIndex(index)}
+                onMouseEnter={() => {
+                  scrollOnActiveChange.current = false
+                  setActiveIndex(index)
+                }}
                 onClick={() => select(index)}
               >
                 {option.label}
