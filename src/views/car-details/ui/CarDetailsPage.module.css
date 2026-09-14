@@ -5,9 +5,6 @@
 
 .layout {
   display: grid;
-  /* fr замість фіксованих 640px/528px: за макетом на 1200px контенту дає
-     рівно ту саму розкладку, але не ламається (без горизонтального скролу),
-     якщо Container колись стане вужчим за 1200px. */
   grid-template-columns: 640fr 528fr;
   gap: 32px;
   align-items: start;

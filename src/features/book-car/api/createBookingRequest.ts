@@ -5,8 +5,6 @@ type BookingRequestResponse = {
   message: string
 }
 
-// Бекенд підтверджено живим запитом: POST повертає 201 і { message }.
-// Порожній comment не відправляємо — поле необовʼязкове для API.
 export async function createBookingRequest(
   carId: string,
   values: BookingFormValues,

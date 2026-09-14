@@ -9,10 +9,6 @@ type PageProps = {
   params: Promise<{ carId: string }>
 }
 
-// loadCar викликається і тут, і в generateMetadata, але зайвого мережевого
-// запиту немає: у межах одного рендеру однакові fetch-виклики дедуплікує
-// автоматична Request Memoization Next.js. `next: { revalidate: 60 }` у
-// getCarById відповідає за інше — за кеш відповіді МІЖ різними запитами.
 async function loadCar(carId: string): Promise<Car | null> {
   try {
     return await getCarById(carId)
@@ -42,7 +38,6 @@ export async function generateMetadata({
     openGraph: {
       title,
       description: car.description,
-      // car.img — уже абсолютний URL, тож годиться напряму без metadataBase.
       images: [{ url: car.img }],
       type: 'website',
     },

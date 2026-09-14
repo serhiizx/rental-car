@@ -12,8 +12,6 @@ export const bookingInitialValues: BookingFormValues = {
   comment: '',
 }
 
-// Коментар необовʼязковий: підтверджено бекендом (POST без comment -> 201) і
-// узгоджено з задачею — порожній рядок у тілі запиту нічого не означає.
 export const bookingSchema = Yup.object({
   name: Yup.string()
     .trim()

@@ -33,9 +33,6 @@ export function SelectField({
   const rootRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLButtonElement>(null)
   const listRef = useRef<HTMLUListElement>(null)
-  // Чи змінили активну опцію з клавіатури. Автопрокрутка потрібна тільки тоді:
-  // при наведенні мишею вона прокручувала б список прямо під курсором, ціль
-  // тікала б з-під нього і клік потрапляв би не в ту опцію.
   const scrollOnActiveChange = useRef(false)
 
   const listboxId = useId()
@@ -44,8 +41,6 @@ export function SelectField({
   const selectedIndex = options.findIndex((option) => option.value === value)
   const selectedLabel = selectedIndex >= 0 ? options[selectedIndex].label : ''
 
-  // Клік поза компонентом закриває список. Слухач вішаємо лише поки він
-  // відкритий, інакше кожен селект на сторінці тримав би зайвий обробник.
   useEffect(() => {
     if (!isOpen) {
       return
@@ -61,7 +56,6 @@ export function SelectField({
     return () => document.removeEventListener('mousedown', handlePointerDown)
   }, [isOpen])
 
-  // Тримаємо активну опцію в полі зору при навігації з клавіатури.
   useEffect(() => {
     if (!isOpen || activeIndex < 0 || !scrollOnActiveChange.current) {
       return
@@ -73,13 +67,9 @@ export function SelectField({
   }, [isOpen, activeIndex])
 
   function open(startIndex: number) {
-    // При відкритті прокрутка доречна завжди: раніше вибрана опція може бути
-    // поза видимою частиною списку.
     scrollOnActiveChange.current = true
     setActiveIndex(startIndex)
     setIsOpen(true)
-    // Safari не дає кнопці фокус при кліку, тож без цього виклику клавіатурна
-    // навігація після відкриття мишею була б мертвою.
     triggerRef.current?.focus()
   }
 

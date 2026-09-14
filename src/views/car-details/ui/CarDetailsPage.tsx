@@ -19,8 +19,6 @@ type CarDetailsPageProps = {
 }
 
 export function CarDetailsPage({ car }: CarDetailsPageProps) {
-  // Порядок і набір пунктів звірені з макетом (Frame "Car Specifications"):
-  // Year, Type, Fuel Consumption, Engine, Mileage.
   const specifications = [
     { icon: <LuCalendar />, label: `Year: ${car.year}` },
     { icon: <LuCar />, label: `Type: ${car.type}` },
@@ -34,9 +32,6 @@ export function CarDetailsPage({ car }: CarDetailsPageProps) {
 
   return (
     <Container className={styles.page}>
-      {/* Права колонка (h1) стоїть у DOM першою заради a11y-порядку заголовків
-          (скрінрідер не має натрапити на h2 раніше за h1); візуальний порядок
-          лівого/правого стовпців повертається через `order` у CSS. */}
       <div className={styles.layout}>
         <div className={styles.right}>
           <header className={styles.header}>

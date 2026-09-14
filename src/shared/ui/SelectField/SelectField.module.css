@@ -13,8 +13,6 @@
   color: var(--color-gray);
 }
 
-/* Якір для випадного списку: він позиціонується абсолютно відносно цього
-   блоку, щоб не розсувати сусідні поля фільтра. */
 .control {
   position: relative;
   width: 100%;
@@ -79,13 +77,6 @@
   box-shadow: var(--shadow-dropdown);
 }
 
-/* Скролбар за макетом: смуга 8px кольору gray light із радіусом 10px,
-   доріжка прозора.
-
-   Стандартні scrollbar-width / scrollbar-color задаємо ТІЛЬКИ там, де немає
-   ::-webkit-scrollbar (Firefox). У Chrome обидва набори підтримуються, але
-   стандартні властивості мають пріоритет і глушать ::-webkit-* правила —
-   тобто одночасне оголошення дало б системний overlay замість смуги з макета. */
 @supports not selector(::-webkit-scrollbar) {
   .list {
     scrollbar-width: thin;

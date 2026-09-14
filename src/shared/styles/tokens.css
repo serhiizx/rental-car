@@ -1,5 +1,4 @@
 :root {
-  /* Колір */
   --color-main: #101828;
   --color-badges: #f2f4f7;
   --color-inputs: #f7f7f7;
@@ -12,10 +11,8 @@
   --color-error: #ec383b;
   --color-error-light: #ffdfdf;
 
-  /* Затемнення фото на головній (з макета: суцільні 20% чорного) */
   --color-hero-overlay: rgba(0, 0, 0, 0.2);
 
-  /* Типографіка */
   --font-family: var(--font-manrope), system-ui, sans-serif;
 
   --font-size-body: 16px;
@@ -46,13 +43,11 @@
   --line-height-logo: 28px;
   --font-weight-logo: 800;
 
-  /* Геометрія */
   --radius-sm: 4px;
   --radius-md: 12px;
   --radius-lg: 14px;
   --radius-pill: 200px;
 
-  /* Тінь випадного списку фільтрів (з макета) */
   --shadow-dropdown: 0 4px 36px rgba(0, 0, 0, 0.02);
 
   --layout-width: 1440px;

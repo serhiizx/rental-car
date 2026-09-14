@@ -29,9 +29,6 @@ export function CarList({ query }: CarListProps) {
     return <CarListLoadingOverlay />
   }
 
-  // isLoadingError (error + no cached data) — не плутати з помилкою довантаження
-  // наступної сторінки: там `data` уже є, і повний список ламати не можна,
-  // за це відповідає toast у Load more нижче.
   if (isLoadingError) {
     return (
       <StatusMessage
