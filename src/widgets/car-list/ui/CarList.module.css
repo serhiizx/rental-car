@@ -5,7 +5,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 276px);
+  grid-template-columns: repeat(auto-fit, 276px);
   gap: 32px 29px;
   justify-content: center;
   list-style: none;

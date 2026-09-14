@@ -9,8 +9,10 @@ type PageProps = {
   params: Promise<{ carId: string }>
 }
 
-// getCarById кешує відповідь через `next: { revalidate: 60 }`, тож виклик
-// і тут, і в generateMetadata не породжує двох мережевих запитів.
+// loadCar викликається і тут, і в generateMetadata, але зайвого мережевого
+// запиту немає: у межах одного рендеру однакові fetch-виклики дедуплікує
+// автоматична Request Memoization Next.js. `next: { revalidate: 60 }` у
+// getCarById відповідає за інше — за кеш відповіді МІЖ різними запитами.
 async function loadCar(carId: string): Promise<Car | null> {
   try {
     return await getCarById(carId)

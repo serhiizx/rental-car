@@ -5,7 +5,10 @@
 
 .layout {
   display: grid;
-  grid-template-columns: 640px 528px;
+  /* fr замість фіксованих 640px/528px: за макетом на 1200px контенту дає
+     рівно ту саму розкладку, але не ламається (без горизонтального скролу),
+     якщо Container колись стане вужчим за 1200px. */
+  grid-template-columns: 640fr 528fr;
   gap: 32px;
   align-items: start;
 }
@@ -14,11 +17,12 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+  min-width: 0;
 }
 
 .imageWrapper {
   width: 100%;
-  height: 512px;
+  aspect-ratio: 640 / 512;
   border-radius: var(--radius-lg);
   overflow: hidden;
   background-color: var(--color-inputs);
@@ -33,6 +37,7 @@
 .right {
   display: flex;
   flex-direction: column;
+  min-width: 0;
   padding: 32px 24px;
   background-color: var(--color-white);
   border-radius: var(--radius-lg);
