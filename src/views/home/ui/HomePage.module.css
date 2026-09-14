@@ -1,5 +1,5 @@
 .hero {
-  height: 700px;
+  min-height: calc(100dvh - var(--header-height) - 1px);
   display: flex;
   align-items: flex-end;
   justify-content: center;
