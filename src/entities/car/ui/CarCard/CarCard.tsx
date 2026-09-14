@@ -40,20 +40,20 @@ export function CarCard({ car, priority = false }: CarCardProps) {
       </div>
 
       <div className={styles.details}>
-        <div className={styles.detailsRow}>
+        <ul className={styles.detailsRow}>
           {detailsRow1.map((item, index) => (
-            <span key={`${item}-${index}`} className={styles.detail}>
+            <li key={`${item}-${index}`} className={styles.detail}>
               {item}
-            </span>
+            </li>
           ))}
-        </div>
-        <div className={styles.detailsRow}>
+        </ul>
+        <ul className={styles.detailsRow}>
           {detailsRow2.map((item, index) => (
-            <span key={`${item}-${index}`} className={styles.detail}>
+            <li key={`${item}-${index}`} className={styles.detail}>
               {item}
-            </span>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
 
       <Link
