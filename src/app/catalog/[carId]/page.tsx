@@ -34,9 +34,18 @@ export async function generateMetadata({
     return { title: 'Car not found' }
   }
 
+  const title = formatCarTitle(car)
+
   return {
-    title: formatCarTitle(car),
+    title,
     description: car.description,
+    openGraph: {
+      title,
+      description: car.description,
+      // car.img — уже абсолютний URL, тож годиться напряму без metadataBase.
+      images: [{ url: car.img }],
+      type: 'website',
+    },
   }
 }
 

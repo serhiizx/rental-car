@@ -6,8 +6,8 @@
   background-image:
     linear-gradient(
       180deg,
-      color-mix(in srgb, var(--color-main) 15%, transparent) 0%,
-      color-mix(in srgb, var(--color-main) 55%, transparent) 100%
+      color-mix(in srgb, var(--color-main) 35%, transparent) 0%,
+      color-mix(in srgb, var(--color-main) 70%, transparent) 100%
     ),
     url('/hero.jpg');
   background-size: cover;

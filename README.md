@@ -82,9 +82,12 @@ The app runs at `http://localhost:3000`.
 | Variable                   | Required | Default                             |
 | -------------------------- | -------- | ----------------------------------- |
 | `NEXT_PUBLIC_API_BASE_URL` | No       | `https://car-rental-api.goit.study` |
+| `NEXT_PUBLIC_SITE_URL`     | No       | `http://localhost:3000`             |
 
 Copy `.env.example` to `.env.local` if you need to point at a different
-backend; the app works out of the box without it.
+backend; the app works out of the box without it. `NEXT_PUBLIC_SITE_URL` is
+used as `metadataBase` for absolute Open Graph URLs — override it with the
+deployed origin in production.
 
 ## Author
 

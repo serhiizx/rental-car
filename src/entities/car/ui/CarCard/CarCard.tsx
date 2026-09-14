@@ -62,6 +62,7 @@ export function CarCard({ car, priority = false }: CarCardProps) {
         rel="noopener noreferrer"
         aria-label={`Read more about ${formatCarTitle(car)}`}
         className={styles.link}
+        prefetch={false}
       >
         Read more
       </Link>
