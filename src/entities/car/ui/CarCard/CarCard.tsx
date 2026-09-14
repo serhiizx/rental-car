@@ -58,7 +58,6 @@ export function CarCard({ car, priority = false }: CarCardProps) {
 
       <Link
         href={`/catalog/${car.id}`}
-        target="_blank"
         rel="noopener noreferrer"
         aria-label={`Read more about ${formatCarTitle(car)}`}
         className={styles.link}
