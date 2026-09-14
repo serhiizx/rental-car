@@ -45,3 +45,7 @@ next-env.d.ts
 # автозгенеровані Next.js файли з правилами для агентів (next dev, agentRules)
 /AGENTS.md
 /CLAUDE.md
+
+# IDE
+.idea
+.vscode
