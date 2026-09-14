@@ -73,87 +73,92 @@ export function CarFilters({ brands, priceRange }: CarFiltersProps) {
   }
 
   return (
-    <form className={styles.form} onSubmit={formik.handleSubmit} noValidate>
-      <div className={styles.brandField}>
-        <SelectField
-          name="brand"
-          label="Car brand"
-          placeholder="Choose a brand"
-          value={formik.values.brand}
-          onChange={(value) => formik.setFieldValue('brand', value)}
-          options={brandOptions}
-        />
-      </div>
-
-      <div className={styles.priceField}>
-        <SelectField
-          name="price"
-          label="Price / 1 hour"
-          placeholder="Choose a price"
-          value={formik.values.price}
-          onChange={(value) => formik.setFieldValue('price', value)}
-          options={priceOptions}
-        />
-      </div>
-
-      <fieldset className={styles.mileage}>
-        <legend className={styles.mileageLabel}>Car mileage / km</legend>
-        <div className={styles.mileageInputs}>
-          <label className={styles.visuallyHidden} htmlFor="minMileage">
-            Mileage from
-          </label>
-          <input
-            id="minMileage"
-            className={`${styles.mileageInput} ${styles.mileageFrom}`}
-            name="minMileage"
-            value={
-              formik.values.minMileage ? `From ${formik.values.minMileage}` : ''
-            }
-            placeholder="From"
-            onBlur={formik.handleBlur}
-            onChange={(event) =>
-              formik.setFieldValue(
-                'minMileage',
-                formatMileageInput(event.target.value),
-              )
-            }
-          />
-          <label className={styles.visuallyHidden} htmlFor="maxMileage">
-            Mileage to
-          </label>
-          <input
-            id="maxMileage"
-            className={`${styles.mileageInput} ${styles.mileageTo}`}
-            name="maxMileage"
-            value={
-              formik.values.maxMileage ? `To ${formik.values.maxMileage}` : ''
-            }
-            placeholder="To"
-            aria-invalid={Boolean(mileageError)}
-            aria-describedby={mileageError ? 'mileage-error' : undefined}
-            onBlur={formik.handleBlur}
-            onChange={(event) =>
-              formik.setFieldValue(
-                'maxMileage',
-                formatMileageInput(event.target.value),
-              )
-            }
+    <div className={styles.formContainer}>
+      <form className={styles.form} onSubmit={formik.handleSubmit} noValidate>
+        <div className={styles.brandField}>
+          <SelectField
+            name="brand"
+            label="Car brand"
+            placeholder="Choose a brand"
+            value={formik.values.brand}
+            onChange={(value) => formik.setFieldValue('brand', value)}
+            options={brandOptions}
           />
         </div>
-        {mileageError ? (
-          <p id="mileage-error" className={styles.error}>
-            {mileageError}
-          </p>
-        ) : null}
-      </fieldset>
 
-      <Button type="submit" className={styles.submit}>
-        Search
-      </Button>
+        <div className={styles.priceField}>
+          <SelectField
+            name="price"
+            label="Price / 1 hour"
+            placeholder="Choose a price"
+            value={formik.values.price}
+            onChange={(value) => formik.setFieldValue('price', value)}
+            options={priceOptions}
+          />
+        </div>
 
-      <button type="button" className={styles.reset} onClick={handleReset}>
-        Clear filters
-      </button>
-    </form>
+        <fieldset className={styles.mileage}>
+          <legend className={styles.mileageLabel}>Car mileage / km</legend>
+          <div className={styles.mileageInputs}>
+            <label className={styles.visuallyHidden} htmlFor="minMileage">
+              Mileage from
+            </label>
+            <input
+              id="minMileage"
+              className={`${styles.mileageInput} ${styles.mileageFrom}`}
+              name="minMileage"
+              value={
+                formik.values.minMileage
+                  ? `From ${formik.values.minMileage}`
+                  : ''
+              }
+              placeholder="From"
+              onBlur={formik.handleBlur}
+              onChange={(event) =>
+                formik.setFieldValue(
+                  'minMileage',
+                  formatMileageInput(event.target.value),
+                )
+              }
+            />
+            <label className={styles.visuallyHidden} htmlFor="maxMileage">
+              Mileage to
+            </label>
+            <input
+              id="maxMileage"
+              className={`${styles.mileageInput} ${styles.mileageTo}`}
+              name="maxMileage"
+              value={
+                formik.values.maxMileage ? `To ${formik.values.maxMileage}` : ''
+              }
+              placeholder="To"
+              aria-invalid={Boolean(mileageError)}
+              aria-describedby={mileageError ? 'mileage-error' : undefined}
+              onBlur={formik.handleBlur}
+              onChange={(event) =>
+                formik.setFieldValue(
+                  'maxMileage',
+                  formatMileageInput(event.target.value),
+                )
+              }
+            />
+          </div>
+          {mileageError ? (
+            <p id="mileage-error" className={styles.error}>
+              {mileageError}
+            </p>
+          ) : null}
+        </fieldset>
+
+        <div className={styles.submitContainer}>
+          <Button type="submit" className={styles.submit}>
+            Search
+          </Button>
+          <button type="button" className={styles.reset} onClick={handleReset}>
+            Clear filters
+          </button>
+        </div>
+      </form>
+    </div>
   )
 }
