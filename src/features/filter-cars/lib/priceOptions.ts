@@ -3,6 +3,10 @@ import type { SelectOption } from '@/shared/ui'
 const PRICE_STEP = 10
 
 export function buildPriceOptions(min: number, max: number): SelectOption[] {
+  if (max <= 0 || max < min) {
+    return []
+  }
+
   const options: SelectOption[] = []
   const start = Math.ceil(min / PRICE_STEP) * PRICE_STEP
 

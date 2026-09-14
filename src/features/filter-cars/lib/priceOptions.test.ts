@@ -19,3 +19,9 @@ test('buildPriceOptions додає некратну верхню межу окр
   )
   assert.equal(options.at(-1)?.label, 'To $85')
 })
+
+test('buildPriceOptions повертає порожній масив для виродженого діапазону (max <= 0 або max < min)', () => {
+  assert.deepEqual(buildPriceOptions(0, 0), [])
+  assert.deepEqual(buildPriceOptions(30, 0), [])
+  assert.deepEqual(buildPriceOptions(30, 10), [])
+})

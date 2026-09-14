@@ -28,6 +28,6 @@
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
   font-weight: var(--font-weight-body);
-  color: var(--color-main);
+  color: var(--color-gray);
   margin: 0;
 }
