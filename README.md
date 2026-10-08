@@ -92,4 +92,4 @@ npm run dev
 
 ## Автор
 
-Serhii Zhdaniuk — jdanuk@gmail.com
+Serhii Zhdaniuk
